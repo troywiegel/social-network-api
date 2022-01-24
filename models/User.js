@@ -21,8 +21,8 @@ const userSchema = new Schema(
                 message: "Please enter a valid email"
             }
         },
-        thoughts: [thoughtSchema],
-        friends: [userSchema]
+        // thoughts: [thoughtSchema],
+        // friends: [userSchema]
 
     },
     {
