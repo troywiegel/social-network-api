@@ -4,29 +4,27 @@ const reactionSchema = new Schema(
     {
         reactionId: {
             type: Schema.Types.ObjectId,
-            default: () => new Types.ObjectId(),
+            default: () => new Types.ObjectId()
         },
         reactionBody: {
             type: String,
             required: true,
-            trim: true,
             maxlength: 280
         },
         username: {
             type: String,
-            required: true,
-            trim: true
+            required: true
         },
         createdAt: {
             type: Date,
-            default: Date.now,
+            default: Date.now
         }
     },
     {
         toJSON: {
-            getters: true,
+            getters: true
         },
-        id: false,
+        id: false
     }
 )
 
