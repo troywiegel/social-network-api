@@ -1,6 +1,6 @@
 const { User, Thought } = require('../models')
 
-// GET one thought by id route
+// GET one thought by id
 const getThought = async (req, res) => {
     try {
         const thought = await Thought.findOne({ _id: req.params.id })
@@ -14,7 +14,7 @@ const getThought = async (req, res) => {
     }
 }
 
-// GET all thoughts route
+// GET all thoughts
 const getThoughts = async (req, res) => {
     try {
         const thoughts = await Thought.find()
@@ -28,13 +28,14 @@ const getThoughts = async (req, res) => {
     }
 }
 
-// POST new thought route
+// POST new thought
 const createThought = async (req, res) => {
     try {
         const thought = await Thought.create(req.body)
         const user = await User.findOneAndUpdate(
             { username: req.body.username },
-            { $push: { thoughts: thought._id } }
+            { $push: { thoughts: thought._id } },
+            { new: true }
         )
         res.status(200).json({ thought, user })
     } catch (err) {
@@ -43,7 +44,7 @@ const createThought = async (req, res) => {
     }
 }
 
-// PUT update thought by id route
+// PUT update thought by id
 const updateThought = async (req, res) => {
     try {
         const thought = await Thought.findOneAndUpdate({ _id: req.params.id }, req.body)
@@ -57,7 +58,7 @@ const updateThought = async (req, res) => {
     }
 }
 
-// DELETE thought by id route
+// DELETE thought by id
 const deleteThought = async (req, res) => {
     try {
         const thought = await Thought.findOneAndDelete({ _id: req.params.id })
@@ -71,7 +72,7 @@ const deleteThought = async (req, res) => {
     }
 }
 
-// POST add reaction route
+// POST add reaction
 const addReaction = async (req, res) => {
     try {
         const reaction = await Thought.findOneAndUpdate({ _id: req.params.id }, { $push: { reactions: req.body } })
@@ -82,7 +83,7 @@ const addReaction = async (req, res) => {
     }
 }
 
-// DELETE thoughts reaction route
+// DELETE thoughts reaction
 const deleteReaction = async (req, res) => {
     try {
         const reaction = await Thought.findOneAndUpdate({ _id: req.params.id }, { $pull: { reactions: req.body } })

@@ -1,6 +1,6 @@
 const { User } = require('../models')
 
-// GET one user by id route
+// GET one user by id
 const getUser = async (req, res) => {
     try {
         const user = await User.findOne({ _id: req.params.id })
@@ -16,12 +16,12 @@ const getUser = async (req, res) => {
     }
 }
 
-// GET all users route
+// GET all users
 const getUsers = async (req, res) => {
     try {
         const user = await User.find()
-            .populate('thoughts')
-            .populate('friends')
+            // .populate('thoughts')
+            // .populate('friends')
         if (!user) {
             res.status(404).json({ message: 'No users found!' })
         }
@@ -32,7 +32,7 @@ const getUsers = async (req, res) => {
     }
 }
 
-// POST new user route
+// POST new user
 const createUser = async (req, res) => {
     try {
         const user = await User.create(req.body)
@@ -43,7 +43,7 @@ const createUser = async (req, res) => {
     }
 }
 
-// PUT update user by id route
+// PUT update user by id
 const updateUser = async (req, res) => {
     try {
         const user = await User.findOneAndUpdate({ _id: req.params.id }, req.body)
@@ -58,7 +58,7 @@ const updateUser = async (req, res) => {
     }
 }
 
-// DELETE user by id route
+// DELETE user by id
 const deleteUser = async (req, res) => {
     try {
         const user = await User.findOneAndDelete({ _id: req.params.id })
@@ -69,7 +69,7 @@ const deleteUser = async (req, res) => {
     }
 }
 
-// POST add friend route
+// POST add friend
 const addFriend = async (req, res) => {
     try {
         const friend = await User.findOneAndUpdate({ _id: req.params.id }, { $push: { friends: req.params.friendId } })
@@ -80,7 +80,7 @@ const addFriend = async (req, res) => {
     }
 }
 
-// DELETE users friend route
+// DELETE users friend
 const deleteFriend = async (req, res) => {
     try {
         const friend = await User.findOneAndUpdate({ _id: req.params.id }, { $pull: { friends: req.params.friendId } })

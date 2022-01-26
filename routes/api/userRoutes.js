@@ -6,8 +6,8 @@ const { getUser, getUsers, createUser, updateUser, deleteUser, addFriend, delete
 // GET all users and POST new user
 router.route('/').get(getUsers).post(createUser)
 
-// GET user POST user Delete user
-router.route('/:id').get(getUser).post(updateUser).delete(deleteUser)
+// GET user PUT user Delete user
+router.route('/:id').get(getUser).put(updateUser).delete(deleteUser)
 
 // POST new firend Delete friend
 router.route('/:id/friends/:friendId').post(addFriend).delete(deleteFriend)
