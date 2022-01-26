@@ -1,14 +1,11 @@
 const connection = require('../config/connection')
-const { User } = require('../models')
-
-// Start the seeding
-console.time('seeding')
-
+const { User, Thought } = require('../models')
 
 // Creates a connection to mongodb
 connection.once('open', async () => {
     // Delete the entries in the collection
     await User.deleteMany({})
+    await Thought.deleteMany({})
 
     // user array to populate User collection
     const users = [
@@ -22,10 +19,22 @@ connection.once('open', async () => {
         }
     ]
 
+    const thoughts = [
+        {
+            thoughtText: 'The wheels on the bus go round and round..',
+            username: 'Larry'
+        },
+        {
+            thoughtText: 'Dont believe me? Just watch..',
+            username: 'Bruno'
+        }
+    ]
+
     // waiting for users to be inserted into the database
     await User.collection.insertMany(users)
+    await Thought.collection.insertMany(thoughts)
 
     console.table(users)
-    console.timeEnd('seeding complete 🌱')
+    console.table(thoughts)
     process.exit(0)
 })
