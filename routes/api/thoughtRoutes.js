@@ -9,7 +9,7 @@ router.route('/').get(getThoughts).post(createThought)
 // GET thought POST thought DELETE thought
 router.route('/:id').get(getThought).put(updateThought).delete(deleteThought)
 
-// POST new reaction
+// POST reaction
 router.route('/:id/reactions').post(addReaction)
 
 // DELETE reaction

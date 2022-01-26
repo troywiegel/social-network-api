@@ -20,8 +20,8 @@ const getUser = async (req, res) => {
 const getUsers = async (req, res) => {
     try {
         const user = await User.find()
-            // .populate('thoughts')
-            // .populate('friends')
+        // .populate('thoughts')
+        // .populate('friends')
         if (!user) {
             res.status(404).json({ message: 'No users found!' })
         }
@@ -46,7 +46,7 @@ const createUser = async (req, res) => {
 // PUT update user by id
 const updateUser = async (req, res) => {
     try {
-        const user = await User.findOneAndUpdate({ _id: req.params.id }, req.body)
+        const user = await User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
 
         if (!user) {
             res.status(404).json({ message: 'no user with that id found!' })
@@ -62,7 +62,7 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
     try {
         const user = await User.findOneAndDelete({ _id: req.params.id })
-        res.status(200).json(user)
+        res.status(200).json({ message: 'User deleted!' })
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
@@ -72,7 +72,7 @@ const deleteUser = async (req, res) => {
 // POST add friend
 const addFriend = async (req, res) => {
     try {
-        const friend = await User.findOneAndUpdate({ _id: req.params.id }, { $push: { friends: req.params.friendId } })
+        const friend = await User.findOneAndUpdate({ _id: req.params.id }, { $push: { friends: req.params.friendId } }, { new: true })
         res.status(200).json(friend)
     } catch (err) {
         console.log(err)
@@ -84,7 +84,7 @@ const addFriend = async (req, res) => {
 const deleteFriend = async (req, res) => {
     try {
         const friend = await User.findOneAndUpdate({ _id: req.params.id }, { $pull: { friends: req.params.friendId } })
-        res.status(200).json(friend)
+        res.status(200).json({ message: 'Friend deleted!' })
     } catch (err) {
         console.log(err)
         res.status(500).json(err)

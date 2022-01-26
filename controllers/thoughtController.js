@@ -37,7 +37,7 @@ const createThought = async (req, res) => {
             { $push: { thoughts: thought._id } },
             { new: true }
         )
-        res.status(200).json({ thought, user })
+        res.status(200).json({ thought })
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
@@ -47,7 +47,7 @@ const createThought = async (req, res) => {
 // PUT update thought by id
 const updateThought = async (req, res) => {
     try {
-        const thought = await Thought.findOneAndUpdate({ _id: req.params.id }, req.body)
+        const thought = await Thought.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
         if (!thought) {
             res.status(404).json({ message: 'thought not found!' })
         }
@@ -65,7 +65,7 @@ const deleteThought = async (req, res) => {
         if (!thought) {
             res.status(404).json({ message: 'thought not found!' })
         }
-        res.status(200).json(thought)
+        res.status(200).json({ message: 'Thought deleted!' })
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
@@ -75,7 +75,7 @@ const deleteThought = async (req, res) => {
 // POST add reaction
 const addReaction = async (req, res) => {
     try {
-        const reaction = await Thought.findOneAndUpdate({ _id: req.params.id }, { $push: { reactions: req.body } })
+        const reaction = await Thought.findOneAndUpdate({ _id: req.params.id }, { $push: { reactions: req.body } }, { new: true })
         res.status(200).json(reaction)
     } catch (err) {
         console.log(err)
@@ -87,7 +87,7 @@ const addReaction = async (req, res) => {
 const deleteReaction = async (req, res) => {
     try {
         const reaction = await Thought.findOneAndUpdate({ _id: req.params.id }, { $pull: { reactions: req.body } })
-        res.status(200).json(reaction)
+        res.status(200).json({ message: 'Reaction deleted!' })
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
