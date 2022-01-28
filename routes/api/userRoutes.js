@@ -9,7 +9,7 @@ router.route('/').get(getUsers).post(createUser)
 // GET user PUT user Delete user
 router.route('/:id').get(getUser).put(updateUser).delete(deleteUser)
 
-// POST new firend Delete friend
+// POST new friend Delete friend
 router.route('/:id/friends/:friendId').post(addFriend).delete(deleteFriend)
 
 module.exports = router
