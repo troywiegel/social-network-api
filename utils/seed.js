@@ -19,6 +19,7 @@ connection.once('open', async () => {
         }
     ]
 
+    // thought array to populate Thought collection
     const thoughts = [
         {
             thoughtText: 'The wheels on the bus go round and round..',
@@ -30,7 +31,7 @@ connection.once('open', async () => {
         }
     ]
 
-    // waiting for users to be inserted into the database
+    // waiting for users and thoughts to be inserted into the database
     await User.collection.insertMany(users)
     await Thought.collection.insertMany(thoughts)
 
