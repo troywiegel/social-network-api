@@ -6,6 +6,7 @@
 ## Description
 This is an API for a social network web app created using Nodejs, Expressjs and MongoDB/Mongoose. Users can share their thoughts, react to friends’ thoughts and create a friend list through Expressjs RESTful CRUD routes.
 
+https://user-images.githubusercontent.com/37552547/151471887-ca4fbca8-a552-487d-8f6e-222bf82ddb32.mp4
 
 <br><br>
                         
